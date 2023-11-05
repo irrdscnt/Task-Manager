@@ -9,6 +9,7 @@ module com.example.taskmanager {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires com.almasb.fxgl.all;
+    requires java.sql;
 
     opens com.example.taskmanager to javafx.fxml;
     exports com.example.taskmanager;
