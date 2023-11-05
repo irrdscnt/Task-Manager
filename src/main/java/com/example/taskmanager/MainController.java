@@ -7,9 +7,8 @@ import javafx.scene.control.TextField;
 
 public class MainController {
     private UserDAO userDAO;
-    private User user; // Добавьте поле user
+    private User user;
     public MainController() {
-        // Пустой конструктор без аргументов
     }
 
     @FXML

@@ -45,7 +45,7 @@ public class LoginController implements Initializable {
 
         User user = dbHandler.loginUser(email, password);
         if (user != null) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Menu.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("main.fxml"));
             MainController mainController = new MainController(user);
             loader.setController(mainController);
             Parent root = null;
