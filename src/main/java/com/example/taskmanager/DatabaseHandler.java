@@ -1,5 +1,7 @@
 package com.example.taskmanager;
 
+import com.example.taskmanager.models.User;
+
 import java.sql.*;
 
 public class DatabaseHandler {
@@ -33,7 +35,9 @@ public class DatabaseHandler {
                 + "title VARCHAR(255), "
                 + "description TEXT, "
                 + "date DATE, "
-                + "status VARCHAR(255)"
+                + "status VARCHAR(255),"
+                + "user_id INT,"
+                + "FOREIGN KEY (user_id) REFERENCES User(user_id)"
                 + ")";
 
         try (Statement statement = getDbConnection().createStatement()) {
@@ -43,7 +47,7 @@ public class DatabaseHandler {
         }
     }
 
-    public boolean loginUser(String email,String password){
+    public User loginUser(String email,String password){
         String selectQuery = "SELECT * FROM " + Const.USERS_TABLE + " WHERE " + Const.USERS_EMAIL + " = ? AND " + Const.USERS_PASSWORD + " = ?";
 
         try (PreparedStatement preparedStatement = getDbConnection().prepareStatement(selectQuery)) {
@@ -51,10 +55,18 @@ public class DatabaseHandler {
             preparedStatement.setString(2, password);
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            return resultSet.next();
+            if (resultSet.next()) {
+                User user = new User();
+                user.setName(resultSet.getString(Const.USERS_NAME));
+                user.setEmail(resultSet.getString(Const.USERS_EMAIL));
+                user.setPassword(resultSet.getString(Const.USERS_PASSWORD));
+                return user;
+            } else {
+                return null; // Если вход не выполнен
+            }
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
+            return null; // Если произошла ошибка
         }
     }
     public void signUpUser(String name,String password,String email) throws RegistrationException{
