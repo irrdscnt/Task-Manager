@@ -1,5 +1,6 @@
 package com.example.taskmanager;
 
+import com.example.taskmanager.models.User;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -42,25 +43,41 @@ public class LoginController implements Initializable {
         String email = Email.getText();
         String password = Password.getText();
 
-        if (dbHandler.loginUser(email, password)) {
-            openMainMenu(event);
-        } else {
-            showAlert("Login Failed", "Please check your credentials and try again.");
-        }
-    }
-
-    private void openMainMenu(ActionEvent event) {
-        try {
+        User user = dbHandler.loginUser(email, password);
+        if (user != null) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Menu.fxml"));
-            Parent root = loader.load();
+            MainController mainController = new MainController(user);
+            loader.setController(mainController);
+            Parent root = null;
+            try {
+                root = loader.load();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
             Scene scene = new Scene(root);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
             stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } else {
+            showAlert("Login Failed", "Please check your credentials and try again.");
         }
+
     }
+
+//    private void openMainMenu(ActionEvent event) {
+//        try {
+//            FXMLLoader loader = new FXMLLoader(getClass().getResource("Menu.fxml"));
+//            MainController mainController = new MainController(user);
+//            loader.setController(mainController);
+//            Parent root = loader.load();
+//            Scene scene = new Scene(root);
+//            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//            stage.setScene(scene);
+//            stage.show();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
 
 //    @FXML
