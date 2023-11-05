@@ -35,76 +35,95 @@ public class LoginController implements Initializable {
     private TextField Email;
     @FXML
     private Button Register;
-    Stage dialogStage = new Stage();
-    Scene scene;
-    Connection connection = null;
-    PreparedStatement preparedStatement = null;
-    ResultSet resultSet = null;
 
+    @FXML
+    void loginAction(ActionEvent event) {
+        DatabaseHandler dbHandler = new DatabaseHandler();
+        String email = Email.getText();
+        String password = Password.getText();
 
-    public LoginController(){
-        connection=Config.connectdb();
-    }
-    public void loginAction(ActionEvent event){
-        String email = Email.getText().toString();
-        String password = Password.getText().toString();
-
-        String sql = "SELECT * FROM test WHERE email = ? and password = ?";
-
-        try{
-            preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, email);
-            preparedStatement.setString(2, password);
-            resultSet = preparedStatement.executeQuery();
-            if(!resultSet.next()){
-                infoBox("Please enter correct Email and Password", null, "Failed");
-            }else{
-                infoBox("Login Sucessfull",null,"Success" );
-                System.out.println(resultSet);
-                Node node = (Node)event.getSource();
-                dialogStage = (Stage) node.getScene().getWindow();
-                dialogStage.close();
-                scene = new Scene(FXMLLoader.load(getClass().getResource("Menu.fxml")));
-                dialogStage.setScene(scene);
-                dialogStage.show();
-            }
+        if (dbHandler.loginUser(email, password)) {
+            openMainMenu(event);
+        } else {
+            showAlert("Login Failed", "Please check your credentials and try again.");
         }
-        catch(Exception e){
+    }
+
+    private void openMainMenu(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Menu.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
-    public static void infoBox(String infoMessage, String headerText, String title){
-        Alert alert = new Alert(AlertType.CONFIRMATION);
-        alert.setContentText(infoMessage);
+
+
+//    @FXML
+//    void loginAction() {
+//        DatabaseHandler dbHandler = new DatabaseHandler();
+//        Login.setOnAction(event -> {
+//            String email = Email.getText();
+//            String password = Password.getText();
+//
+//            if (dbHandler.loginUser(email, password)) {
+//                Scene scene = null;
+//                try {
+//                    scene = new Scene(FXMLLoader.load(getClass().getResource("Menu.fxml")));
+//                } catch (IOException e) {
+//                    throw new RuntimeException(e);
+//                }
+//                dialogStage.setScene(scene);
+//                dialogStage.show();
+//                } else {
+//                showAlert("Login Failed", "Please check your credentials and try again.");
+//            }
+//        });
+//    }
+@FXML
+public void registerClick(ActionEvent event) {
+    Parent root;
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/taskmanager/register.fxml"));
+        root = loader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+        // Закрываем текущее окно (если нужно)
+        ((Node) event.getSource()).getScene().getWindow().hide();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
+
+//    @FXML
+//    public void registerClick(){
+//        Register.setOnAction(event -> {
+//            Register.getScene().getWindow().hide();
+//            FXMLLoader loader= new FXMLLoader();
+//            loader.setLocation(getClass().getResource("/com/example/taskmanager/register.fxml"));
+//            try {
+//                loader.load();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//            Parent root = loader.getRoot();
+//            Stage stage= new Stage();
+//            stage.setScene(new Scene(root));
+//            stage.showAndWait();
+//        });
+//
+//    }
+    private void showAlert(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
-        alert.setHeaderText(headerText);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
         alert.showAndWait();
-    }
-    @FXML
-    public void registerClick(){
-        Register.setOnAction(event -> {
-            Register.getScene().getWindow().hide();
-            FXMLLoader loader= new FXMLLoader();
-            loader.setLocation(getClass().getResource("/com/example/taskmanager/register.fxml"));
-            try {
-                loader.load();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            Parent root = loader.getRoot();
-            Stage stage= new Stage();
-            stage.setScene(new Scene(root));
-            stage.showAndWait();
-        });
-
-    }
-    @FXML
-    public void RegisterClick(){
-        Register.setOnAction(event->{
-            System.out.println("rabotai pozhalsta");
-        });
-
     }
     @Override
     public void initialize(URL url, ResourceBundle rb) {

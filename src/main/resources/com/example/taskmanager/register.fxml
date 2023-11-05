@@ -4,25 +4,32 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #967eff;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #967eff;" xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="com.example.taskmanager.RegisterController" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button layoutX="264.0" layoutY="312.0" mnemonicParsing="false" style="-fx-background-color: #1b1145;" text="Register" textFill="WHITE">
+      <Button fx:id="Register" layoutX="258.0" layoutY="308.0" mnemonicParsing="false" style="-fx-background-color: #1b1145;" text="Register" textFill="WHITE">
          <font>
-            <Font name="Droid Sans" size="13.0" />
-         </font></Button>
-      <Label layoutX="220.0" layoutY="43.0" text="Registration" textFill="#1b1145">
+            <Font name="Droid Sans" size="17.0" />
+         </font>
+      </Button>
+      <Label layoutX="213.0" layoutY="42.0" text="Registration" textFill="#1b1145">
          <font>
-            <Font name="Droid Sans" size="30.0" />
+            <Font name="Droid Sans" size="33.0" />
          </font></Label>
-      <Label layoutX="220.0" layoutY="217.0" text="Password" textFill="#1b1145">
-         <font>
-            <Font size="17.0" />
-         </font></Label>
-      <Label layoutX="216.0" layoutY="138.0" text="Name" textFill="#1b1145">
+      <Label layoutX="219.0" layoutY="218.0" text="Password" textFill="#1b1145">
          <font>
             <Font name="Droid Sans" size="17.0" />
          </font></Label>
-      <PasswordField layoutX="216.0" layoutY="247.0" promptText="Type Password" />
-      <TextField layoutX="216.0" layoutY="168.0" promptText="Enter your name" />
+      <Label layoutX="216.0" layoutY="95.0" text="Name" textFill="#1b1145">
+         <font>
+            <Font name="Droid Sans" size="17.0" />
+         </font></Label>
+      <PasswordField fx:id="password" layoutX="216.0" layoutY="247.0" promptText="Type Password" />
+      <TextField fx:id="name" layoutX="216.0" layoutY="122.0" promptText="Enter your name" />
+      <Label layoutX="216.0" layoutY="158.0" text="Email" textFill="#1b1145">
+         <font>
+            <Font name="Droid Sans" size="17.0" />
+         </font>
+      </Label>
+      <TextField fx:id="email" layoutX="216.0" layoutY="188.0" promptText="Enter your Email" />
    </children>
 </AnchorPane>
