@@ -4,12 +4,12 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.taskmanager.LoginController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #a895ff;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.taskmanager.LoginController">
    <children>
-      <Button fx:id="Register" layoutX="264.0" layoutY="362.0" mnemonicParsing="false" style="-fx-background-color: violet;" text="Register" />
+      <Button fx:id="Register" layoutX="264.0" layoutY="362.0" mnemonicParsing="false" onAction="#registerClick" style="-fx-background-color: #a43bff;" text="Register" textFill="WHITE" />
       <Label layoutX="228.0" layoutY="334.0" text="Don't have an account?" />
-      <Button fx:id="Login" onAction="#loginAction" contentDisplay="CENTER" layoutX="237.0" layoutY="288.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="126.0" style="-fx-background-color: green;" text="Login" textFill="WHITE" />
-      <Label layoutX="260.0" layoutY="71.0" text="Log in">
+      <Button fx:id="Login" contentDisplay="CENTER" layoutX="237.0" layoutY="288.0" mnemonicParsing="false" onAction="#loginAction" prefHeight="24.0" prefWidth="126.0" style="-fx-background-color: #1b1145;" text="Login" textFill="WHITE" />
+      <Label layoutX="260.0" layoutY="71.0" text="Log in" textFill="#1b1145">
          <font>
             <Font name="Droid Sans" size="30.0" />
          </font></Label>

@@ -2,10 +2,13 @@ package com.example.taskmanager;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -37,6 +40,8 @@ public class LoginController implements Initializable {
     Connection connection = null;
     PreparedStatement preparedStatement = null;
     ResultSet resultSet = null;
+
+
     public LoginController(){
         connection=Config.connectdb();
     }
@@ -75,6 +80,31 @@ public class LoginController implements Initializable {
         alert.setTitle(title);
         alert.setHeaderText(headerText);
         alert.showAndWait();
+    }
+    @FXML
+    public void registerClick(){
+        Register.setOnAction(event -> {
+            Register.getScene().getWindow().hide();
+            FXMLLoader loader= new FXMLLoader();
+            loader.setLocation(getClass().getResource("/com/example/taskmanager/register.fxml"));
+            try {
+                loader.load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Parent root = loader.getRoot();
+            Stage stage= new Stage();
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+        });
+
+    }
+    @FXML
+    public void RegisterClick(){
+        Register.setOnAction(event->{
+            System.out.println("rabotai pozhalsta");
+        });
+
     }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
