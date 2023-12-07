@@ -45,15 +45,19 @@ public class LoginController implements Initializable {
 
         User user = dbHandler.loginUser(email, password);
         if (user != null) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("main.fxml"));
-            MainController mainController = new MainController(user);
-            loader.setController(mainController);
+            System.out.println(user.getId());
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("TaskManager.fxml"));
+//            MainController mainController = new MainController(user);
+//            loader.setController(mainController);
             Parent root = null;
             try {
                 root = loader.load();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+            MainController mainController = loader.getController();
+            mainController.initData(user);
+
             Scene scene = new Scene(root);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);

@@ -1,6 +1,7 @@
 package com.example.taskmanager.models;
 
 public class User {
+    private int user_id;
     private String name;
 
     private String email;
@@ -32,5 +33,11 @@ public class User {
     }
 
 
+    public int getId() {
+        return user_id;
+    }
 
+    public void setId(int user_id) {
+        this.user_id=user_id;
+    }
 }

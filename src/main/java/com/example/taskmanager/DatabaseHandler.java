@@ -1,12 +1,19 @@
 package com.example.taskmanager;
 
 import com.example.taskmanager.models.User;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseHandler {
     private Connection connection;
-
+    private DatePicker datePicker;
+    private TextArea taskTextArea;
+    private ListView<String> taskListView;
     public Connection getDbConnection() throws SQLException {
         try {
             connection = DriverManager.getConnection(Config.DB_URL, Config.DB_USER, Config.DB_PASSWORD);
@@ -57,6 +64,7 @@ public class DatabaseHandler {
 
             if (resultSet.next()) {
                 User user = new User();
+                user.setId(resultSet.getInt(Const.USERS_ID));
                 user.setName(resultSet.getString(Const.USERS_NAME));
                 user.setEmail(resultSet.getString(Const.USERS_EMAIL));
                 user.setPassword(resultSet.getString(Const.USERS_PASSWORD));
@@ -85,6 +93,61 @@ public class DatabaseHandler {
             e.printStackTrace();
         }
     }
+
+    void saveTaskToDatabase(String title, String description,Date date,String status,User user) {
+        try (PreparedStatement preparedStatement = getDbConnection().prepareStatement("INSERT INTO Task (title,description,date,status,user_id) VALUES (?, ?,?,?,?)")) {
+            preparedStatement.setString(1, title);
+            preparedStatement.setString(2, description);
+            preparedStatement.setDate(3, date);
+            preparedStatement.setString(4, status);
+            preparedStatement.setInt(5, user.getId());
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    // Ваш метод в DatabaseHandler для получения задач по выбранной дате
+    public List<String> loadTasksFromDatabase(Date selectedDate) {
+        List<String> tasks = new ArrayList<>();
+
+        // Здесь напишите код для выполнения запроса к базе данных
+        // и выборки задач по выбранной дате
+        // Пример (не забудьте адаптировать под вашу структуру данных):
+        try (Statement statement = getDbConnection().createStatement()) {
+            String query = "SELECT title FROM Task WHERE date = ?";
+            try (PreparedStatement preparedStatement = getDbConnection().prepareStatement(query)) {
+                preparedStatement.setDate(1, selectedDate);
+
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    while (resultSet.next()) {
+                        String task = resultSet.getString("title");
+                        tasks.add(task);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Обработайте исключение по вашему усмотрению
+        }
+
+        return tasks;
+    }
+
+    //    List<String> loadTasksFromDatabase() {
+//        try (Statement statement = getDbConnection().createStatement()) {
+//            ResultSet resultSet = statement.executeQuery("SELECT * FROM Task");
+//            while (resultSet.next()) {
+//                String date = resultSet.getString("date");
+//                String task = resultSet.getString("title");
+//                String taskEntry = date + ": " + task;
+//                taskListView.getItems().add(taskEntry);
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return null;
+//    }
     public class RegistrationException extends Exception {
         public RegistrationException(String message) {
             super(message);
