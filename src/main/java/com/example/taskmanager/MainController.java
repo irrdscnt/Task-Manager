@@ -1,5 +1,6 @@
 package com.example.taskmanager;
 
+import com.example.taskmanager.models.Task;
 import com.example.taskmanager.models.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -8,11 +9,11 @@ import javafx.scene.control.*;
 
 import java.sql.Date;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class MainController {
-    private ObservableList<String> taskList; // Список задач для отображения в ListView
+//    private ObservableList<String> taskList; // Список задач для отображения в ListView
+    ObservableList<Task> taskList = FXCollections.observableArrayList();
 
     private UserDAO userDAO;
     private User user;
@@ -33,6 +34,24 @@ public class MainController {
     void initialize() {
         taskList = FXCollections.observableArrayList();
         taskListView.setItems(taskList);
+        datePicker.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                updateTaskListForDate(Date.valueOf(newValue),user);
+            }
+        });
+        taskListView.setCellFactory(param -> new ListCell<Task>() {
+            @Override
+            protected void updateItem(Task item, boolean empty) {
+                super.updateItem(item, empty);
+
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText(String.format("Title: %s, Status: %s, Description: %s",
+                            item.getTitle(), item.getStatus(), item.getDescription()));
+                }
+            }
+        });
 //        if (user != null) {
 //            Username.setText("Welcome, " + user.getName());
 //        }
@@ -42,6 +61,19 @@ public class MainController {
 
         System.out.println("Метод initialize() вызван");
 
+    }
+    private void updateTaskListForDate(Date selectedDate,User user) {
+        // Очистите текущий список задач
+        taskList.clear();
+
+        // Получите задачи из базы данных для выбранной даты
+        // и добавьте их в taskList
+        DatabaseHandler dbHandler = new DatabaseHandler();
+        List<Task> tasks = dbHandler.loadTasksFromDatabase(selectedDate,user);
+        taskList.addAll(tasks);
+
+        // Обновите отображение списка в taskListView
+        taskListView.setItems(taskList);
     }
         @FXML
         private TextField titleTextField;
@@ -56,43 +88,72 @@ public class MainController {
 
 
         @FXML
-        private ListView<String> taskListView;
-        @FXML
-        private void handleDatePickerAction() {
-            LocalDate selectedDate = datePicker.getValue();
-            updateTaskListForDate(Date.valueOf(selectedDate));
-        }
-        private void updateTaskListForDate(Date selectedDate) {
-            // Очистите текущий список задач
-            taskList.clear();
+            private ListView<Task> taskListView;
+//        @FXML
+//        private void handleDatePickerAction() {
+//            LocalDate selectedDate = datePicker.getValue();
+//            updateTaskListForDate(Date.valueOf(selectedDate));
+//        }
 
-            // Получите задачи из базы данных для выбранной даты
-            // и добавьте их в taskList
-            DatabaseHandler dbHandler = new DatabaseHandler();
-            // Напишите код для получения задач по выбранной дате из базы данных
 
-            // Пример (не забудьте адаптировать под вашу структуру данных):
-            List<String> tasks = dbHandler.loadTasksFromDatabase(selectedDate);
-            taskList.addAll(tasks);
-        }
-
+    //        private void updateTaskListForDate(Date selectedDate) {
+//            // Очистите текущий список задач
+//            taskList.clear();
+//
+//            // Получите задачи из базы данных для выбранной даты
+//            // и добавьте их в taskList
+//            DatabaseHandler dbHandler = new DatabaseHandler();
+//            // Напишите код для получения задач по выбранной дате из базы данных
+//
+//            // Пример (не забудьте адаптировать под вашу структуру данных):
+//            List<Task> tasks = dbHandler.loadTasksFromDatabase(selectedDate);
+//            taskList.addAll(tasks);
+//        }
         @FXML
         private void addTask() {
             DatabaseHandler dbHandler = new DatabaseHandler();
-            String title=titleTextField.getText();
-            String description=descriptionTextArea.getText();
+            String title = titleTextField.getText();
+            String description = descriptionTextArea.getText();
             Date date = Date.valueOf(datePicker.getValue());
-            String status=statusTextField.getText();
-
-
+            String status = statusTextField.getText();
 
             if (!title.isEmpty()) {
-                String taskEntry = date + ": " + title;
-                taskListView.getItems().add(taskEntry);
-                dbHandler.saveTaskToDatabase(title,description,date,status,user);
+                // Создайте объект Task
+                Task newTask = new Task(title, status, description, date);
 
+                // Добавьте объект Task в ObservableList
+                taskList.add(newTask);
+
+                // Обновите отображение списка в taskListView
+                taskListView.setItems(taskList);
+
+                // Сохраните задачу в базе данных
+                dbHandler.saveTaskToDatabase(title, description, date, status, user);
+
+                // Очистите поля ввода
                 titleTextField.clear();
+                descriptionTextArea.clear();
+                statusTextField.clear();
+                datePicker.getEditor().clear();
             }
         }
+//        @FXML
+//        private void addTask() {
+//            DatabaseHandler dbHandler = new DatabaseHandler();
+//            String title=titleTextField.getText();
+//            String description=descriptionTextArea.getText();
+//            Date date = Date.valueOf(datePicker.getValue());
+//            String status=statusTextField.getText();
+//
+//
+//
+//            if (!title.isEmpty()) {
+//                String taskEntry = date + ": " + title;
+//                taskListView.getItems().add(taskEntry);
+//                dbHandler.saveTaskToDatabase(title,description,date,status,user);
+//
+//                titleTextField.clear();
+//            }
+//        }
     }
 

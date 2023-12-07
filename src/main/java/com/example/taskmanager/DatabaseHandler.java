@@ -1,5 +1,6 @@
 package com.example.taskmanager;
 
+import com.example.taskmanager.models.Task;
 import com.example.taskmanager.models.User;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
@@ -14,6 +15,8 @@ public class DatabaseHandler {
     private DatePicker datePicker;
     private TextArea taskTextArea;
     private ListView<String> taskListView;
+    private User user;
+
     public Connection getDbConnection() throws SQLException {
         try {
             connection = DriverManager.getConnection(Config.DB_URL, Config.DB_USER, Config.DB_PASSWORD);
@@ -22,6 +25,7 @@ public class DatabaseHandler {
             throw e;
         }
     }
+
     public void createUserTable() {
         String createTableSQL = "CREATE TABLE IF NOT EXISTS User ("
                 + "user_id INT AUTO_INCREMENT PRIMARY KEY, "
@@ -108,27 +112,31 @@ public class DatabaseHandler {
         }
     }
     // Ваш метод в DatabaseHandler для получения задач по выбранной дате
-    public List<String> loadTasksFromDatabase(Date selectedDate) {
-        List<String> tasks = new ArrayList<>();
+    public List<Task> loadTasksFromDatabase(Date selectedDate, User user) {
+        List<Task> tasks = new ArrayList<>();
 
         // Здесь напишите код для выполнения запроса к базе данных
         // и выборки задач по выбранной дате
         // Пример (не забудьте адаптировать под вашу структуру данных):
         try (Statement statement = getDbConnection().createStatement()) {
-            String query = "SELECT title FROM Task WHERE date = ?";
+            String query = "SELECT title, status, description,date FROM Task WHERE date = ? AND user_id = ?";
             try (PreparedStatement preparedStatement = getDbConnection().prepareStatement(query)) {
                 preparedStatement.setDate(1, selectedDate);
+                preparedStatement.setInt(2, user.getId());
 
                 try (ResultSet resultSet = preparedStatement.executeQuery()) {
                     while (resultSet.next()) {
-                        String task = resultSet.getString("title");
+                        String title = resultSet.getString("title");
+                        String status = resultSet.getString("status");
+                        String description = resultSet.getString("description");
+                        Date date = Date.valueOf(resultSet.getString("date"));
+                        Task task = new Task(title, status, description,date);
                         tasks.add(task);
                     }
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            // Обработайте исключение по вашему усмотрению
         }
 
         return tasks;
