@@ -10,7 +10,11 @@ module com.example.taskmanager {
     requires org.kordamp.bootstrapfx.core;
     requires com.almasb.fxgl.all;
     requires java.sql;
-
+    requires java.net.http;
+    requires com.fasterxml.jackson.annotation;
+    requires com.fasterxml.jackson.databind;
+    exports com.example.taskmanager.models to com.fasterxml.jackson.databind;
+    opens com.example.taskmanager.models to com.fasterxml.jackson.databind;
     opens com.example.taskmanager to javafx.fxml;
     exports com.example.taskmanager;
 }
