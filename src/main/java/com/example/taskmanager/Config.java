@@ -22,8 +22,8 @@ import java.sql.ResultSet;
 //    }
 //}
 public class Config {
-    public static final String DB_USER = "admin";
-    public static final String DB_PASSWORD = "0000";
+    public static final String DB_USER = "root";
+    public static final String DB_PASSWORD = "00000";
     public static final String DB_HOST = "localhost"; // Адрес сервера MySQL
     public static final String DB_PORT = "3306"; // Порт сервера MySQL
     public static final String DB_NAME = "taskmanager"; // Имя вашей базы данных

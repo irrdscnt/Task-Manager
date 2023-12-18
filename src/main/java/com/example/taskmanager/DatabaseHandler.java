@@ -27,12 +27,12 @@ public class DatabaseHandler {
     }
 
     public void createUserTable() {
-        String createTableSQL = "CREATE TABLE IF NOT EXISTS User ("
+        String createTableSQL = "CREATE TABLE IF NOT EXISTS `User` ("
                 + "user_id INT AUTO_INCREMENT PRIMARY KEY, "
                 + "name VARCHAR(255), "
                 + "password VARCHAR(255), "
                 + "email VARCHAR(255) "
-                + ")";
+                + ") CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;";
 
         try (Statement statement = getDbConnection().createStatement()) {
             statement.execute(createTableSQL);

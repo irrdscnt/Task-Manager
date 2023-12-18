@@ -47,8 +47,8 @@ public class MainController {
                 if (empty || item == null) {
                     setText(null);
                 } else {
-                    setText(String.format("Title: %s, Status: %s, Description: %s",
-                            item.getTitle(), item.getStatus(), item.getDescription()));
+                    setText(String.format("Title: %s, Status: %s, Description: %s,Date: %s",
+                            item.getTitle(), item.getStatus(), item.getDescription(),item.getDate()));
                 }
             }
         });
