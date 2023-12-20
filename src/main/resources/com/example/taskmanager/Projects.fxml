@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="540.0" prefWidth="756.0" style="-fx-background-image: url('https://imagesbase.ru/uploads/posts/2015-01/1421586168_imagesbase.ru-1207.jpg'); -fx-background-size: cover;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.taskmanager.Projects">
+<AnchorPane prefHeight="540.0" prefWidth="756.0" style="-fx-background-image: url('https://imagesbase.ru/uploads/posts/2015-01/1421586168_imagesbase.ru-1207.jpg'); -fx-background-size: cover;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.taskmanager.ProjectsController">
    <children>
-      <HBox layoutX="40.0" layoutY="212.0" prefHeight="270.0" prefWidth="202.0" style="-fx-background-color: #FFFFFF;">
+      <HBox fx:id="todoBox" layoutX="40.0" layoutY="293.0" prefHeight="242.0" prefWidth="202.0" style="-fx-background-color: #FFFFFF;">
          <children>
             <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="34.0" prefWidth="202.0" style="-fx-background-color: #BA55D3;" text="zu erledigen">
                <font>
@@ -16,7 +15,7 @@
             </Label>
          </children>
       </HBox>
-      <HBox layoutX="290.0" layoutY="212.0" prefHeight="270.0" prefWidth="202.0" style="-fx-background-color: #FFFFFF;">
+      <HBox fx:id="inProgressBox" layoutX="290.0" layoutY="293.0" prefHeight="242.0" prefWidth="202.0" style="-fx-background-color: #FFFFFF;">
          <children>
             <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="316.0" style="-fx-background-color: #9400D3;" text="in Bearbeitung">
                <font>
@@ -24,7 +23,7 @@
                </font>
             </Label>
          </children></HBox>
-      <HBox layoutX="526.0" layoutY="212.0" prefHeight="270.0" prefWidth="202.0" style="-fx-background-color: #FFFFFF;">
+      <HBox fx:id="finishedBox" layoutX="531.0" layoutY="293.0" prefHeight="242.0" prefWidth="202.0" style="-fx-background-color: #FFFFFF;">
          <children>
             <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="391.0" style="-fx-background-color: #8B008B;" text="erledigt">
                <font>
@@ -33,15 +32,9 @@
             </Label>
          </children>
       </HBox>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="34.0" layoutY="80.0" prefHeight="75.0" prefWidth="391.0" text="Meine Projekte" textFill="#4b1268">
-         <font>
-            <Font name="System Bold" size="52.0" />
-         </font>
-      </Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="605.0" layoutY="14.0" prefHeight="35.0" prefWidth="137.0" text="Task Verwalter" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
+      <ChoiceBox fx:id="projectChoiceBox" layoutX="14.0" layoutY="31.0" prefWidth="150.0" />
+      <Label layoutX="31.0" layoutY="6.0" text="Choose Project" />
+      <Label layoutX="244.0" layoutY="6.0" text="Create Project" />
+      <Button onAction="#CreateProjectClick" layoutX="235.0" layoutY="22.0" mnemonicParsing="false" text="Create Project" />
    </children>
 </AnchorPane>

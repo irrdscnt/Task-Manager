@@ -53,5 +53,6 @@
             <Font name="System Bold" size="52.0" />
          </font>
       </Label>
+      <Button fx:id="projectsButton" layoutX="629.0" layoutY="471.0" mnemonicParsing="false" text="My projects" onAction="#handleProjectsButton" />
    </children>
 </AnchorPane>

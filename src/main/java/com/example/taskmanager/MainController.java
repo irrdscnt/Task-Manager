@@ -6,9 +6,15 @@ import com.example.taskmanager.models.User;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URI;
@@ -30,8 +36,9 @@ public class MainController {
     }
     public void initData(User user) {
         this.user = user;
-        // Дополнительные операции с пользователем при необходимости
     }
+    @FXML
+    private Button projectsButton;
     @FXML
     Label Username;
     @FXML
@@ -175,6 +182,33 @@ public class MainController {
                 datePicker.getEditor().clear();
             }
         }
+        @FXML
+        void handleProjectsButton(ActionEvent event) {
+            // Load the "Projects.fxml" file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Projects.fxml"));
+//                Parent projectsParent = loader.load();
+//
+//                // Get the controller associated with the "Projects.fxml"
+//                ProjectsController projectsController = loader.getController();
+//
+//                // Pass the user information to the next controller
+//                projectsController.setUser(user);
+            Parent root = null;
+            try {
+                root = loader.load();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            ProjectsController projectsController = loader.getController();
+            projectsController.initData(user);
+            System.out.println(user.getId());
+            Scene projectsScene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(projectsScene);
+            stage.show();
+
+        }
+
 //        @FXML
 //        private void addTask() {
 //            DatabaseHandler dbHandler = new DatabaseHandler();
