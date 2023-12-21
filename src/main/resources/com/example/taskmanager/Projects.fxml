@@ -1,40 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="540.0" prefWidth="756.0" style="-fx-background-image: url('https://imagesbase.ru/uploads/posts/2015-01/1421586168_imagesbase.ru-1207.jpg'); -fx-background-size: cover;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.taskmanager.ProjectsController">
+<AnchorPane prefHeight="540.0" prefWidth="756.0" style="-fx-background-image: url('https://s2.best-wallpaper.net/wallpaper/1920x1080/1410/Mountains-purple-sky-dusk_1920x1080.jpg'); -fx-background-size: cover;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.taskmanager.ProjectsController">
    <children>
-      <HBox fx:id="todoBox" layoutX="40.0" layoutY="293.0" prefHeight="242.0" prefWidth="202.0" style="-fx-background-color: #FFFFFF;">
-         <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="34.0" prefWidth="202.0" style="-fx-background-color: #BA55D3;" text="zu erledigen">
-               <font>
-                  <Font size="25.0" />
-               </font>
-            </Label>
-         </children>
-      </HBox>
-      <HBox fx:id="inProgressBox" layoutX="290.0" layoutY="293.0" prefHeight="242.0" prefWidth="202.0" style="-fx-background-color: #FFFFFF;">
-         <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="316.0" style="-fx-background-color: #9400D3;" text="in Bearbeitung">
-               <font>
-                  <Font size="25.0" />
-               </font>
-            </Label>
-         </children></HBox>
-      <HBox fx:id="finishedBox" layoutX="531.0" layoutY="293.0" prefHeight="242.0" prefWidth="202.0" style="-fx-background-color: #FFFFFF;">
-         <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="391.0" style="-fx-background-color: #8B008B;" text="erledigt">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-         </children>
-      </HBox>
-      <ChoiceBox fx:id="projectChoiceBox" layoutX="14.0" layoutY="31.0" prefWidth="150.0" />
-      <Label layoutX="31.0" layoutY="6.0" text="Choose Project" />
-      <Label layoutX="244.0" layoutY="6.0" text="Create Project" />
-      <Button onAction="#CreateProjectClick" layoutX="235.0" layoutY="22.0" mnemonicParsing="false" text="Create Project" />
+      <HBox fx:id="todoBox" layoutX="40.0" layoutY="261.0" prefHeight="242.0" prefWidth="202.0" style="-fx-background-color: #FFFFFF;" />
+      <HBox fx:id="inProgressBox" layoutX="290.0" layoutY="261.0" prefHeight="242.0" prefWidth="202.0" style="-fx-background-color: #FFFFFF;" />
+      <HBox fx:id="finishedBox" layoutX="531.0" layoutY="261.0" prefHeight="242.0" prefWidth="202.0" style="-fx-background-color: #FFFFFF;" />
+      <ChoiceBox fx:id="projectChoiceBox" layoutX="58.0" layoutY="80.0" prefHeight="25.0" prefWidth="212.0" />
+      <Label layoutX="58.0" layoutY="30.0" text="Wählen Sie ein Projekt aus" textFill="#54094a">
+         <font>
+            <Font name="System Bold" size="34.0" />
+         </font></Label>
+      <Label layoutX="241.0" layoutY="55.0" />
+      <Button layoutX="617.0" layoutY="79.0" mnemonicParsing="false" onAction="#CreateProjectClick" style="-fx-background-color: purple;" text="Projekt erstellen" textFill="WHITE">
+         <font>
+            <Font size="13.0" />
+         </font></Button>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="40.0" layoutY="209.0" prefHeight="34.0" prefWidth="202.0" style="-fx-background-color: #BA55D3;" text="zu erledigen">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="290.0" layoutY="209.0" prefHeight="36.0" prefWidth="202.0" style="-fx-background-color: #9400D3;" text="in Bearbeitung">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="531.0" layoutY="210.0" prefHeight="35.0" prefWidth="202.0" style="-fx-background-color: #8B008B;" text="erledigt">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

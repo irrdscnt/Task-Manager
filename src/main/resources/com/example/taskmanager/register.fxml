@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-image: url('https://imagesbase.ru/uploads/posts/2015-01/1421586168_imagesbase.ru-1207.jpg'); -fx-background-size: cover;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.taskmanager.RegisterController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-image: url('https://s2.best-wallpaper.net/wallpaper/1920x1080/1410/Mountains-purple-sky-dusk_1920x1080.jpg'); -fx-background-size: cover;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.taskmanager.RegisterController">
    <children>
       <Button fx:id="Register" layoutX="242.0" layoutY="322.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="83.0" style="-fx-background-color: #4B0082;" text="Register" textFill="WHITE">
          <font>

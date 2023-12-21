@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-image: url('https://imagesbase.ru/uploads/posts/2015-01/1421586168_imagesbase.ru-1207.jpg'); -fx-background-size: cover;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.taskmanager.LoginController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-image: url('https://s2.best-wallpaper.net/wallpaper/1920x1080/1410/Mountains-purple-sky-dusk_1920x1080.jpg'); -fx-background-size: cover;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.taskmanager.LoginController">
    <children>
       <Button fx:id="Register" layoutX="251.0" layoutY="338.0" mnemonicParsing="false" onAction="#registerClick" style="-fx-background-color: #a43bff;" text="Registrierung" textFill="WHITE" />
       <Label layoutX="223.0" layoutY="312.0" prefHeight="26.0" prefWidth="156.0" text="kein Account? erstellen!" textFill="WHITE">
