@@ -119,6 +119,22 @@ public class ProjectsController {
         // Additional styling and settings for the task label
         return taskLabel;
     }
+    @FXML
+    void handleBackToTaskManagerButton(ActionEvent event) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("TaskManager.fxml"));
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        MainController mainController = loader.getController();
+        mainController.initData(user);
+        Scene taskManagerScene = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(taskManagerScene);
+        stage.show();
+    }
 
 }
 
