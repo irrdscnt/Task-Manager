@@ -8,13 +8,17 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -35,13 +39,13 @@ public class ProjectsController {
     private ChoiceBox<Project> projectChoiceBox;
 
     @FXML
-    private HBox todoBox;
+    private VBox todoBox;
 
     @FXML
-    private HBox inProgressBox;
+    private VBox inProgressBox;
 
     @FXML
-    private HBox finishedBox;
+    private VBox finishedBox;
 
     private ObservableList<Project> projectList;
 
@@ -103,12 +107,14 @@ public class ProjectsController {
             finishedBox.getChildren().clear();
 
             for (ProjectTask task : selectedProject.getTasks()) {
+                Label taskLabel = createTaskLabel(task.getDescription());
+
                 if ("zu erledigen".equals(task.getStatus())) {
-                    todoBox.getChildren().add(createTaskLabel(task.getDescription()));
+                    todoBox.getChildren().add(taskLabel);
                 } else if ("in Bearbeitung".equals(task.getStatus())) {
-                    inProgressBox.getChildren().add(createTaskLabel(task.getDescription()));
+                    inProgressBox.getChildren().add(taskLabel);
                 } else if ("erledigt".equals(task.getStatus())) {
-                    finishedBox.getChildren().add(createTaskLabel(task.getDescription()));
+                    finishedBox.getChildren().add(taskLabel);
                 }
             }
         }
@@ -116,6 +122,11 @@ public class ProjectsController {
 
     private Label createTaskLabel(String taskText) {
         Label taskLabel = new Label(taskText);
+        taskLabel.setFont(new Font(18));
+        taskLabel.setStyle("-fx-text-fill: black;"); // Adjust text color as needed
+        taskLabel.setMaxWidth(Double.MAX_VALUE);
+        taskLabel.setAlignment(Pos.TOP_LEFT);
+        taskLabel.setContentDisplay(ContentDisplay.TOP);
         // Additional styling and settings for the task label
         return taskLabel;
     }

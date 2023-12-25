@@ -4,11 +4,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="540.0" prefWidth="756.0" style="-fx-background-image: url('https://s2.best-wallpaper.net/wallpaper/1920x1080/1410/Mountains-purple-sky-dusk_1920x1080.jpg'); -fx-background-size: cover;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.taskmanager.ProjectsController">
+<AnchorPane prefHeight="540.0" prefWidth="756.0" style="-fx-background-image: url('https://s2.best-wallpaper.net/wallpaper/1920x1080/1410/Mountains-purple-sky-dusk_1920x1080.jpg   '); -fx-background-size: cover;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.taskmanager.ProjectsController">
    <children>
-      <HBox fx:id="todoBox" layoutX="40.0" layoutY="261.0" prefHeight="242.0" prefWidth="202.0" style="-fx-background-color: #FFFFFF;" />
-      <HBox fx:id="inProgressBox" layoutX="290.0" layoutY="261.0" prefHeight="242.0" prefWidth="202.0" style="-fx-background-color: #FFFFFF;" />
-      <HBox fx:id="finishedBox" layoutX="531.0" layoutY="261.0" prefHeight="242.0" prefWidth="202.0" style="-fx-background-color: #FFFFFF;" />
+      <VBox fx:id="todoBox" layoutX="40.0" layoutY="261.0" prefHeight="242.0" prefWidth="202.0" style="-fx-background-color: #FFFFFF;" />
+      <VBox fx:id="inProgressBox" layoutX="290.0" layoutY="261.0" prefHeight="242.0" prefWidth="202.0" style="-fx-background-color: #FFFFFF;" />
+      <VBox fx:id="finishedBox" layoutX="531.0" layoutY="261.0" prefHeight="242.0" prefWidth="202.0" style="-fx-background-color: #FFFFFF;" />
       <ChoiceBox fx:id="projectChoiceBox" layoutX="58.0" layoutY="80.0" prefHeight="25.0" prefWidth="212.0" />
       <Label layoutX="58.0" layoutY="30.0" text="Wählen Sie ein Projekt aus" textFill="#54094a">
          <font>
